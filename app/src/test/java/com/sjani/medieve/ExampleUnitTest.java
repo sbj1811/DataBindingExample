@@ -1,4 +1,4 @@
-package com.sjani.medieve;
+package com.sjani.databindingexample;
 
 import org.junit.Test;
 
