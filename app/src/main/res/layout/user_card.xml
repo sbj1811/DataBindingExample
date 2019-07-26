@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+       <variable
+            name="viewModel"
+            type="com.sjani.medieve.EventListViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/user_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/std_margin"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <LinearLayout
+                android:id="@+id/name_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/std_margin"
+                android:layout_marginTop="@dimen/std_padding"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name_lable"
+                    android:textColor="@color/light_gray" />
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/std_padding"
+                    android:text="@{viewModel.getUser.getName()}"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/std_font_size"
+                    tools:text="Stephen A. McMillan" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/address_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/std_margin"
+                android:layout_marginTop="@dimen/std_padding"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name_ll">
+
+                <TextView
+                    android:id="@+id/address_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/address"
+                    android:textColor="@color/light_gray" />
+
+                <TextView
+                    android:id="@+id/user_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/std_padding"
+                    android:text="@{viewModel.getUser.getAddress1()}"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/std_font_size"
+                    tools:text="2508 Young Road Murtaugh, ID 83344" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sex_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/std_margin"
+                android:layout_marginTop="@dimen/std_padding"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/address_ll">
+
+                <TextView
+                    android:id="@+id/sex_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sex"
+                    android:textColor="@color/light_gray" />
+
+                <TextView
+                    android:id="@+id/user_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/std_padding"
+                    android:text="@{viewModel.getUser.getSex()}"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/std_font_size"
+                    tools:text="male" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/dob_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/std_margin"
+                android:layout_marginTop="@dimen/std_padding"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sex_ll">
+
+                <TextView
+                    android:id="@+id/dob_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/date_of_birth"
+                    android:textColor="@color/light_gray" />
+
+                <TextView
+                    android:id="@+id/user_dob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/std_padding"
+                    android:text="@{viewModel.getUser.getDob()}"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/std_font_size"
+                    tools:text="4/16/1953" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/disease_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/std_margin"
+                android:layout_marginTop="@dimen/std_padding"
+                android:layout_marginBottom="@dimen/std_padding"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dob_ll">
+
+                <TextView
+                    android:id="@+id/disease_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/disease"
+                    android:textColor="@color/light_gray" />
+
+                <TextView
+                    android:id="@+id/user_disease"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/std_padding"
+                    android:text="@{viewModel.getUser.getDisease()}"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/std_font_size"
+                    tools:text="asthma" />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
