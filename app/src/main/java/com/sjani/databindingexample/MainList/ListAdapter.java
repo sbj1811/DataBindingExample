@@ -1,5 +1,6 @@
 package com.sjani.databindingexample.MainList;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -18,6 +19,7 @@ import com.sjani.databindingexample.BR;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder> {
 
+    private static final String TAG = ListAdapter.class.getSimpleName();
     private List<Event> eventList;
     private int layoutId;
     private EventListViewModel viewModel;
@@ -35,9 +37,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
         return new ListViewHolder(binding);
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
         holder.bind(viewModel,position);
+
     }
 
     @Override
@@ -58,13 +63,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
     }
 
     public void swapResults(List<Event> result) {
-        if (eventList == result) {
-            return;
-        }
         this.eventList = result;
-        if (result != null) {
-            this.notifyDataSetChanged();
-        }
     }
 
     public class ListViewHolder extends RecyclerView.ViewHolder {
@@ -76,6 +75,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListViewHolder
             super(binding.getRoot());
             this.binding = binding;
         }
+
 
         void bind(EventListViewModel viewModel, Integer position) {
             viewModel.getEventAt(position);

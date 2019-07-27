@@ -2,7 +2,9 @@ package com.sjani.databindingexample;
 
 
 import android.util.Log;
+import android.view.View;
 
+import androidx.databinding.ObservableInt;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -23,10 +25,14 @@ public class EventListViewModel extends ViewModel {
     private ListAdapter adapter;
     private User newUser;
     private List<Event> eventList;
+    public ObservableInt loading;
+    public ObservableInt showEmpty;
 
     public void init(){
         adapter = new ListAdapter(R.layout.event_list_item,this);
         newUser = new User();
+        loading = new ObservableInt(View.GONE);
+        showEmpty = new ObservableInt(View.GONE);
     }
 
     public ListAdapter getAdapter() {
@@ -45,14 +51,10 @@ public class EventListViewModel extends ViewModel {
         });
         eventList = reversedList;
         this.adapter.swapResults(reversedList);
-        for (Event e: eventList) {
-            Log.e(TAG, "setEventsInAdapter: HERE 1 "+e.toString());
-        }
         this.adapter.notifyDataSetChanged();
     }
 
     public void setUser(User user) {
-        Log.e(TAG, "setUser: HERE 3 "+user.toString());
         this.newUser.setName(user.getName());
         this.newUser.setAddress1(String.format("%s %s", user.getAddress1(), user.getAddress2()));
         this.newUser.setDob(user.getDob());
@@ -62,7 +64,6 @@ public class EventListViewModel extends ViewModel {
 
     public Event getEventAt(Integer index){
         Event event = new Event();
-        Log.e(TAG, "getEventAt: HERE 2 "+eventList.get(index).toString());
         event.setMedication(eventList.get(index).getMedication());
         event.setMedicationtype(eventList.get(index).getMedicationtype());
         event.setId(eventList.get(index).getId());
@@ -76,7 +77,6 @@ public class EventListViewModel extends ViewModel {
     }
 
     public User getUser(){
-        Log.e(TAG, "getUser: HERE 4 "+newUser.toString());
         return newUser;
     }
 

@@ -3,15 +3,18 @@ package com.sjani.databindingexample.MainList;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.facebook.stetho.Stetho;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.sjani.databindingexample.Models.Event;
 import com.sjani.databindingexample.R;
 import com.sjani.databindingexample.AddEvent.AddEventActivity;
 import com.sjani.databindingexample.EventListViewModel;
@@ -19,6 +22,8 @@ import com.sjani.databindingexample.ViewModelFactory;
 import com.sjani.databindingexample.Utils.FactoryUtils;
 import com.sjani.databindingexample.Utils.ListItemListerner;
 import com.sjani.databindingexample.databinding.ActivityMainBinding;
+
+import java.util.List;
 
 /**
  * Main activity with user card and medication event list
@@ -54,16 +59,20 @@ public class MainActivity extends AppCompatActivity implements ListItemListerner
         ActivityMainBinding activityMainBinding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         ViewModelFactory factory = FactoryUtils.getFactory(this);
         eventListViewModel = ViewModelProviders.of(this, factory).get(EventListViewModel.class);
-        if (savedInstanceState==null) {
+      //  if (savedInstanceState==null) {
             eventListViewModel.init();
-        }
+     //   }
         eventListViewModel.getUsers().observe(this, Users -> {
             if (Users != null && Users.size() != 0) eventListViewModel.setUser(Users.get(0));
+            eventListViewModel.getEventsforUser().observe(this, events -> {
+                eventListViewModel.loading.set(View.GONE);
+                if (events != null && events.size() != 0) {
+                    eventListViewModel.showEmpty.set(View.GONE);
+                    eventListViewModel.setEventsInAdapter(events);
+                }
+                activityMainBinding.setViewModel(eventListViewModel);
+            });
         });
-        eventListViewModel.getEventsforUser().observe(this, Events -> {
-            if (Events != null && Events.size() != 0) eventListViewModel.setEventsInAdapter(Events);
-        });
-        activityMainBinding.setViewModel(eventListViewModel);
     }
 
     private void showAddEvent() {
